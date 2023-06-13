@@ -1,12 +1,39 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image  } from 'react-native';
 
 const QuizGame = () => {
   const [questions, setQuestions] = useState([
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Qual campeão é irmão de Garen?',
+      options: ['Vayne', 'Lux', 'Lucian', 'Sona'],
+      correctAnswer: 'Lux',
+      answered: false,
+      userAnswer: null,
+      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+    },
+
+    {
+      question: 'O que significa a abreviatura TFT significa?',
+      options: ['Team for Team', 'Team for Team', 'Teamfight Tactics', 'Teams for Tactics'],
+      correctAnswer: 'Teamfight Tactics',
+      answered: false,
+      userAnswer: null,
+      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+    },
+
+    {
+      question: 'Quem criou o Blitzcrank?',
+      options: ['Viktor', 'Dr. Mundo', 'Camille', 'Urgot'],
+      correctAnswer: 'Viktor',
+      answered: false,
+      userAnswer: null,
+      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+    },
+
+    {
+      question: ' Em que ano o jogo foi lançado?',
+      options: ['2011', '2010', '2009', '2007'],
+      correctAnswer: '2009',
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
@@ -14,71 +41,53 @@ const QuizGame = () => {
 
     {
       question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      options: ['Porque ele não quer casar com ela', 'Porque ambos não acreditam em casamentos', 'Porque ambos não acreditam em casamentos', 'Porque ouvi-lo propor todos os dias'],
+      correctAnswer: 'Porque ouvi-lo propor todos os dias',
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
     },
 
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Como o mapa 3vs3 foi chamado em inglês?',
+      options: ['Summoner’s Rift', 'Twisted Treeline', 'Forbidden Forest', 'Dark Forest'],
+      correctAnswer: 'Twisted Treeline',
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
     },
 
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Quantos campeões estavam disponíveis quando o jogo foi lançado?',
+      options: ['30', '40', '50', '20'],
+      correctAnswer: '40',
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
     },
 
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
-      answered: false,
-      userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
-    },
-
-    {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
-      answered: false,
-      userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
-    },
-
-    {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
-      answered: false,
-      userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
-    },
-
-    {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Qual campeão é casado com Ashe?',
+      options: ['Shen', 'Ahri', 'Zed', 'Tryndamere'],
+      correctAnswer: 'Tryndamere',
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
     },
     
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Em qual classe campeã pertence Kalista?',
+      options: ['Mago', 'Especialista', 'Atirador', 'Lutador'],
+      correctAnswer: 'Atirador',
+      answered: false,
+      userAnswer: null,
+      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+    },
+
+    {
+      question: 'Em que nível a maioria dos campeões desbloqueia sua habilidade final?',
+      options: ['Nível 7', 'Nível 6', 'Nível 5', 'Nível 3'],
+      correctAnswer: 'Nível 6',
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
@@ -129,15 +138,7 @@ const QuizGame = () => {
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
     },
 
-    {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
-      answered: false,
-      userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
-    },
-
+    // Adicione as outras perguntas aqui
   ]);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -194,6 +195,7 @@ const QuizGame = () => {
 
   return (
     <View style={styles.container}>
+
       {showScore ? (
         <View style={styles.scoreContainer}>
           {showLossMessage ? (
