@@ -138,7 +138,6 @@ const QuizGame = () => {
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
     },
 
-    // Adicione as outras perguntas aqui
   ]);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
