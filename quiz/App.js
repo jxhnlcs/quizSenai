@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image  } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet, Image, Modal } from 'react-native';
 
 const QuizGame = () => {
   const [questions, setQuestions] = useState([
@@ -9,58 +9,58 @@ const QuizGame = () => {
       correctAnswer: 'Lux',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: Os irmãos faziam parte de uma família influente que serviu como protetores dos reis de Demacia por gerações.".',
     },
 
     {
-      question: 'O que significa a abreviatura TFT significa?',
-      options: ['Team for Team', 'Team for Team', 'Teamfight Tactics', 'Teams for Tactics'],
-      correctAnswer: 'Teamfight Tactics',
+      question: 'Qual o campeão conhecido como Amoeba no League of Legends?',
+      options: ['Zac', 'Teemo', 'Jax', 'Fiora' ,' Heimerdinger '],
+      correctAnswer: ' Zac',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Verde".',
     },
 
     {
-      question: 'Quem criou o Blitzcrank?',
-      options: ['Viktor', 'Dr. Mundo', 'Camille', 'Urgot'],
-      correctAnswer: 'Viktor',
+      question: 'Qual a cidade que a Fiora representa?',
+      options: ['Noxus', 'Piltover', 'Ionia', 'Bandle city ',],
+      correctAnswer: 'Demacia',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica:  Em um reino imponente e legítimo com uma prestigiosa história militar, os habitantes de ... sempre colocaram os ideais de justiça, honra e dever acima de tudp.".',
     },
 
     {
-      question: ' Em que ano o jogo foi lançado?',
-      options: ['2011', '2010', '2009', '2007'],
-      correctAnswer: '2009',
+      question: ' Qual menor campeão do jogo League of Legends?',
+      options: ['Fizz', 'Heimerdinger', 'Tristana', 'Teemo'],
+      correctAnswer: 'Teemo',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: Nunca subestime o poder do código do escoteiro.".".',
     },
 
     {
       question: 'Qual é a capital da França?',
-      options: ['Porque ele não quer casar com ela', 'Porque ambos não acreditam em casamentos', 'Porque ambos não acreditam em casamentos', 'Porque ouvi-lo propor todos os dias'],
-      correctAnswer: 'Porque ouvi-lo propor todos os dias',
+      options: ['Darius', 'Dreivennnnnn', 'Fiora', 'Gragas', 'Fiora'],
+      correctAnswer: 'Gragas', 
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
     },
 
     {
-      question: 'Como o mapa 3vs3 foi chamado em inglês?',
-      options: ['Summoner’s Rift', 'Twisted Treeline', 'Forbidden Forest', 'Dark Forest'],
-      correctAnswer: 'Twisted Treeline',
+      question: 'Qual foi o time Campeão mundial de 2015?',
+      options: [' CLG', 'PAIN GAMING', 'FNATIC ', 'SKT T1 '],
+      correctAnswer: ' SKT T1',
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
     },
 
     {
-      question: 'Quantos campeões estavam disponíveis quando o jogo foi lançado?',
-      options: ['30', '40', '50', '20'],
-      correctAnswer: '40',
+      question: 'Qual campeão que usa um Poste de latão como arma?',
+      options: ['Fiora', 'Jax', 'Leona', 'Azir'],
+      correctAnswer: 'Jax',
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
@@ -94,9 +94,9 @@ const QuizGame = () => {
     },
 
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Qual o campeão que foi eleito pelos jogadores como o mais irritante?',
+      options: ['Annie', 'Teemo', 'Master Yi', 'Jax'],
+      correctAnswer: 'Teemo',
       answered: false,
       userAnswer: null,
       hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
@@ -146,6 +146,15 @@ const QuizGame = () => {
   const [showScore, setShowScore] = useState(false);
   const [showLossMessage, setShowLossMessage] = useState(false);
   const [showWinMessage, setShowWinMessage] = useState(false);
+  const [showHint, setShowHint] = useState(false);
+
+  const handleHint = () => {
+    setShowHint(true);
+  };
+
+  const closeHintPopup = () => {
+    setShowHint(false);
+  };
 
   const handleAnswer = (selectedOption) => {
     if (!questions[currentQuestion].answered) {
@@ -171,19 +180,12 @@ const QuizGame = () => {
     }
   };
 
-  const handleHint = () => {
-    const updatedQuestions = [...questions];
-    updatedQuestions[currentQuestion].hintUsed = true;
-    setQuestions(updatedQuestions);
-  };
-
   const resetQuiz = () => {
     setQuestions(
       questions.map((q) => ({
         ...q,
         answered: false,
         userAnswer: null,
-        hintUsed: false,
       }))
     );
     setCurrentQuestion(0);
@@ -222,12 +224,20 @@ const QuizGame = () => {
           ))}
           {!questions[currentQuestion].answered && !questions[currentQuestion].hintUsed && (
             <TouchableOpacity style={styles.hintButton} onPress={handleHint}>
-              <Text style={styles.hintButtonText}>Dica</Text>
+            <Text style={styles.hintButtonText}>Dica</Text>
             </TouchableOpacity>
-          )}
+          )}  
           {questions[currentQuestion].hintUsed && (
-            <Text style={styles.hintText}>{questions[currentQuestion].hint}</Text>
+          <Text style={styles.hintText}>{questions[currentQuestion].hint}</Text>
           )}
+          {showHint && (
+  <View style={styles.hintPopup}>
+    <Text style={styles.hintPopupText}>{questions[currentQuestion].hint}</Text>
+    <TouchableOpacity style={styles.hintPopupButton} onPress={closeHintPopup}>
+      <Text style={styles.hintPopupButtonText}>Fechar</Text>
+    </TouchableOpacity>
+  </View>
+)}
         </View>
       )}
     </View>
