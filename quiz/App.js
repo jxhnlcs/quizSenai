@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { View, Text, TouchableOpacity, StyleSheet, Image, Modal } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 
 const QuizGame = () => {
   const [questions, setQuestions] = useState([
@@ -9,61 +9,43 @@ const QuizGame = () => {
       correctAnswer: 'Lux',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Os irmãos faziam parte de uma família influente que serviu como protetores dos reis de Demacia por gerações.".',
+      hint: 'Os irmãos faziam parte de uma família influente que serviu como protetores dos reis de Demacia por gerações.',
     },
 
     {
-      question: 'Qual o campeão conhecido como Amoeba no League of Legends?',
-      options: ['Zac', 'Teemo', 'Jax', 'Fiora' ,' Heimerdinger '],
-      correctAnswer: ' Zac',
+      question: 'O que significa a abreviatura TFT?',
+      options: ['Team for Team', 'Team for Team', 'Teamfight Tactics', 'Teams for Tactics'],
+      correctAnswer: 'Teamfight Tactics',
       answered: false,
       userAnswer: null,
-      hint: 'Verde".',
+      hint: 'Duelo em equipe em inglês.',
     },
 
     {
-      question: 'Qual a cidade que a Fiora representa?',
-      options: ['Noxus', 'Piltover', 'Ionia', 'Bandle city ',],
-      correctAnswer: 'Demacia',
+      question: 'Quem criou o Blitzcrank?',
+      options: ['Viktor', 'Dr. Mundo', 'Camille', 'Urgot'],
+      correctAnswer: 'Viktor',
       answered: false,
       userAnswer: null,
-      hint: 'Dica:  Em um reino imponente e legítimo com uma prestigiosa história militar, os habitantes de ... sempre colocaram os ideais de justiça, honra e dever acima de tudp.".',
+      hint: 'Seu criador é um campeão que reside em Zaun.',
     },
 
     {
-      question: ' Qual menor campeão do jogo League of Legends?',
-      options: ['Fizz', 'Heimerdinger', 'Tristana', 'Teemo'],
-      correctAnswer: 'Teemo',
+      question: 'Como o mapa 3vs3 foi chamado em inglês?',
+      options: ['Summoner’s Rift', 'Twisted Treeline', 'Forbidden Forest', 'Dark Forest'],
+      correctAnswer: 'Twisted Treeline',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Nunca subestime o poder do código do escoteiro.".".',
+      hint: '"Linhas das árvores".',
     },
 
     {
-      question: 'Qual é a capital da França?',
-      options: ['Darius', 'Dreivennnnnn', 'Fiora', 'Gragas', 'Fiora'],
-      correctAnswer: 'Gragas', 
+      question: 'Quantos campeões estavam disponíveis quando o jogo foi lançado?',
+      options: ['30', '40', '50', '20'],
+      correctAnswer: '40',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
-    },
-
-    {
-      question: 'Qual foi o time Campeão mundial de 2015?',
-      options: [' CLG', 'PAIN GAMING', 'FNATIC ', 'SKT T1 '],
-      correctAnswer: ' SKT T1',
-      answered: false,
-      userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
-    },
-
-    {
-      question: 'Qual campeão que usa um Poste de latão como arma?',
-      options: ['Fiora', 'Jax', 'Leona', 'Azir'],
-      correctAnswer: 'Jax',
-      answered: false,
-      userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: >= 30 ou <=50.',
     },
 
     {
@@ -72,16 +54,16 @@ const QuizGame = () => {
       correctAnswer: 'Tryndamere',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Esse campeão reside em Freljord.',
     },
-    
+
     {
       question: 'Em qual classe campeã pertence Kalista?',
       options: ['Mago', 'Especialista', 'Atirador', 'Lutador'],
       correctAnswer: 'Atirador',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: Essa classe costuma ter campeões que usam armas de longa distância.',
     },
 
     {
@@ -90,52 +72,70 @@ const QuizGame = () => {
       correctAnswer: 'Nível 6',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: É menor que nível 10.',
     },
 
     {
-      question: 'Qual o campeão que foi eleito pelos jogadores como o mais irritante?',
-      options: ['Annie', 'Teemo', 'Master Yi', 'Jax'],
+      question: 'Qual o campeão conhecido como Amoeba no League of Legends?',
+      options: ['Zac', 'Teemo', 'Jax', 'Fiora', ' Heimerdinger '],
+      correctAnswer: 'Zac',
+      answered: false,
+      userAnswer: null,
+      hint: 'Dica: Verde.',
+    },
+
+    {
+      question: 'Qual a nação que a Fiora representa?',
+      options: ['Noxus', 'Piltover', 'Ionia', 'Demacia',],
+      correctAnswer: 'Demacia',
+      answered: false,
+      userAnswer: null,
+      hint: 'É uma nação em crise.',
+    },
+
+    {
+      question: ' Qual menor campeão do jogo League of Legends?',
+      options: ['Fizz', 'Heimerdinger', 'Tristana', 'Teemo'],
       correctAnswer: 'Teemo',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: Ele faz cocô.',
     },
 
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Qual foi o time Campeão mundial de 2015?',
+      options: [' CLG', 'PAIN GAMING', 'FNATIC ', 'SKT T1'],
+      correctAnswer: 'SKT T1',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: É o time de um cara que já foi considerado o melhor do mundo.',
     },
 
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Qual campeão que usa um poste como arma?',
+      options: ['Fiora', 'Jax', 'Leona', 'Azir'],
+      correctAnswer: 'Jax',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: "Imagina se eu tivesse uma arma de verdade" disse ele.',
     },
 
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Quem é a irmã de Kayle?',
+      options: ['Morgana', 'Katarina', 'Akali', 'Cassiopeia'],
+      correctAnswer: 'Morgana',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: Conhecida como "O Anjo Caído".',
     },
 
     {
-      question: 'Qual é a capital da França?',
-      options: ['Paris', 'Londres', 'Madrid', 'Berlim'],
-      correctAnswer: 'Paris',
+      question: 'Qual campeão é conhecido como "Aspecto do Crepúsculo"',
+      options: ['Kayle', 'Aurelion Sol', 'Aatrox', 'Zoe'],
+      correctAnswer: 'Zoe',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Esta cidade é conhecida como a "Cidade do Amor".',
+      hint: 'Dica: Tem cabelo grande.',
     },
 
     // Adicione as outras perguntas aqui
@@ -146,15 +146,6 @@ const QuizGame = () => {
   const [showScore, setShowScore] = useState(false);
   const [showLossMessage, setShowLossMessage] = useState(false);
   const [showWinMessage, setShowWinMessage] = useState(false);
-  const [showHint, setShowHint] = useState(false);
-
-  const handleHint = () => {
-    setShowHint(true);
-  };
-
-  const closeHintPopup = () => {
-    setShowHint(false);
-  };
 
   const handleAnswer = (selectedOption) => {
     if (!questions[currentQuestion].answered) {
@@ -180,12 +171,19 @@ const QuizGame = () => {
     }
   };
 
+  const handleHint = () => {
+    const updatedQuestions = [...questions];
+    updatedQuestions[currentQuestion].hintUsed = true;
+    setQuestions(updatedQuestions);
+  };
+
   const resetQuiz = () => {
     setQuestions(
       questions.map((q) => ({
         ...q,
         answered: false,
         userAnswer: null,
+        hintUsed: false,
       }))
     );
     setCurrentQuestion(0);
@@ -197,7 +195,6 @@ const QuizGame = () => {
 
   return (
     <View style={styles.container}>
-
       {showScore ? (
         <View style={styles.scoreContainer}>
           {showLossMessage ? (
@@ -222,24 +219,18 @@ const QuizGame = () => {
               <Text style={styles.optionText}>{option}</Text>
             </TouchableOpacity>
           ))}
-          {!questions[currentQuestion].answered && !questions[currentQuestion].hintUsed && (
-            <TouchableOpacity style={styles.hintButton} onPress={handleHint}>
-            <Text style={styles.hintButtonText}>Dica</Text>
-            </TouchableOpacity>
-          )}  
-          {questions[currentQuestion].hintUsed && (
-          <Text style={styles.hintText}>{questions[currentQuestion].hint}</Text>
-          )}
-          {showHint && (
-  <View style={styles.hintPopup}>
-    <Text style={styles.hintPopupText}>{questions[currentQuestion].hint}</Text>
-    <TouchableOpacity style={styles.hintPopupButton} onPress={closeHintPopup}>
-      <Text style={styles.hintPopupButtonText}>Fechar</Text>
-    </TouchableOpacity>
-  </View>
-)}
+          
         </View>
+        
       )}
+      {!questions[currentQuestion].answered && !questions[currentQuestion].hintUsed && (
+            <TouchableOpacity style={styles.hintButton} onPress={handleHint}>
+              <Text style={styles.hintButtonText}>Dica</Text>
+            </TouchableOpacity>
+          )}
+          {questions[currentQuestion].hintUsed && (
+            <Text style={styles.hintText}>{questions[currentQuestion].hint}</Text>
+          )}
     </View>
   );
 };
