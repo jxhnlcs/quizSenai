@@ -137,8 +137,6 @@ const QuizGame = () => {
       userAnswer: null,
       hint: 'Dica: Tem cabelo grande.',
     },
-
-    // Adicione as outras perguntas aqui
   ]);
 
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -146,6 +144,7 @@ const QuizGame = () => {
   const [showScore, setShowScore] = useState(false);
   const [showLossMessage, setShowLossMessage] = useState(false);
   const [showWinMessage, setShowWinMessage] = useState(false);
+  const [gameStarted, setGameStarted] = useState(false);
 
   const handleAnswer = (selectedOption) => {
     if (!questions[currentQuestion].answered) {
@@ -193,44 +192,57 @@ const QuizGame = () => {
     setShowWinMessage(false);
   };
 
+  const startGame = () => {
+    setGameStarted(true);
+  };
+
   return (
     <View style={styles.container}>
-      {showScore ? (
-        <View style={styles.scoreContainer}>
-          {showLossMessage ? (
-            <Text style={styles.scoreText}>Você perdeu por acertar menos de 8 perguntas.</Text>
-          ) : (
-            <Text style={styles.scoreText}>Você venceu acertando {score} de {questions.length} perguntas!</Text>
-          )}
-          <TouchableOpacity style={styles.button} onPress={resetQuiz}>
-            <Text style={styles.buttonText}>Jogar Novamente</Text>
+      {gameStarted ? (
+        showScore ? (
+          <View style={styles.scoreContainer}>
+            {showLossMessage ? (
+              <Text style={styles.scoreText}>Você perdeu por acertar menos de 8 perguntas.</Text>
+            ) : (
+              <Text style={styles.scoreText}>Você venceu acertando {score} de {questions.length} perguntas!</Text>
+            )}
+            <TouchableOpacity style={styles.button} onPress={resetQuiz}>
+              <Text style={styles.buttonText}>Jogar Novamente</Text>
+            </TouchableOpacity>
+          </View>
+        ) : (
+          <View>
+            <View style={styles.questionContainer}>
+              <Text style={styles.questionText}>{questions[currentQuestion].question}</Text>
+            </View>
+            {questions[currentQuestion].options.map((option, index) => (
+              <TouchableOpacity
+                key={index}
+                style={styles.optionButton}
+                onPress={() => handleAnswer(option)}
+                disabled={questions[currentQuestion].answered}
+              >
+                <Text style={styles.optionText}>{option}</Text>
+              </TouchableOpacity>
+            ))}
+            {!questions[currentQuestion].answered && !questions[currentQuestion].hintUsed && (
+              <TouchableOpacity style={styles.hintButton} onPress={handleHint}>
+                <Text style={styles.hintButtonText}>Dica</Text>
+              </TouchableOpacity>
+            )}
+            {questions[currentQuestion].hintUsed && (
+              <Text style={styles.hintText}>{questions[currentQuestion].hint}</Text>
+            )}
+          </View>
+        )
+      ) : (
+        <View style={styles.startContainer}>
+          <Text style={styles.startText}>League of Legends Quiz</Text>
+          <TouchableOpacity style={styles.startButton} onPress={startGame}>
+            <Text style={styles.startButtonText}>Iniciar Jogo</Text>
           </TouchableOpacity>
         </View>
-      ) : (
-        <View>
-          <Text style={styles.questionText}>{questions[currentQuestion].question}</Text>
-          {questions[currentQuestion].options.map((option, index) => (
-            <TouchableOpacity
-              key={index}
-              style={styles.optionButton}
-              onPress={() => handleAnswer(option)}
-              disabled={questions[currentQuestion].answered}
-            >
-              <Text style={styles.optionText}>{option}</Text>
-            </TouchableOpacity>
-          ))}
-          
-        </View>
-        
       )}
-      {!questions[currentQuestion].answered && !questions[currentQuestion].hintUsed && (
-            <TouchableOpacity style={styles.hintButton} onPress={handleHint}>
-              <Text style={styles.hintButtonText}>Dica</Text>
-            </TouchableOpacity>
-          )}
-          {questions[currentQuestion].hintUsed && (
-            <Text style={styles.hintText}>{questions[currentQuestion].hint}</Text>
-          )}
     </View>
   );
 };
@@ -241,53 +253,73 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
+  startContainer: {
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  startText: {
+    fontSize: 24,
+    marginBottom: 20,
+    textAlign: 'center',
+  },
+  startButton: {
+    backgroundColor: 'blue',
+    padding: 10,
+    borderRadius: 5,
+  },
+  startButtonText: {
+    color: 'white',
+    fontSize: 18,
+  },
+  questionContainer: {
+    marginBottom: 20,
+  },
+  questionText: {
+    fontSize: 20,
+    textAlign: 'center',
+  },
+  optionButton: {
+    backgroundColor: 'lightgray',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
+  optionText: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  hintButton: {
+    backgroundColor: 'yellow',
+    padding: 10,
+    marginVertical: 5,
+    borderRadius: 5,
+  },
+  hintButtonText: {
+    fontSize: 16,
+    textAlign: 'center',
+  },
+  hintText: {
+    marginTop: 10,
+    fontSize: 14,
+    textAlign: 'center',
+  },
   scoreContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
   scoreText: {
-    fontSize: 24,
-    marginBottom: 20,
-    textAlign: 'center',
-  },
-  button: {
-    backgroundColor: '#3498db',
-    padding: 10,
-    borderRadius: 5,
-  },
-  buttonText: {
-    color: '#fff',
-    fontSize: 18,
-  },
-  questionText: {
     fontSize: 20,
     marginBottom: 20,
     textAlign: 'center',
   },
-  optionButton: {
-    backgroundColor: '#e0e0e0',
+  button: {
+    backgroundColor: 'blue',
     padding: 10,
     borderRadius: 5,
-    marginBottom: 10,
   },
-  optionText: {
-    fontSize: 16,
-  },
-  hintButton: {
-    backgroundColor: '#3498db',
-    padding: 10,
-    borderRadius: 5,
-    marginTop: 10,
-  },
-  hintButtonText: {
-    color: '#fff',
-    fontSize: 16,
-    textAlign: 'center',
-  },
-  hintText: {
-    fontSize: 16,
-    marginTop: 10,
-    textAlign: 'center',
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
   },
 });
 
