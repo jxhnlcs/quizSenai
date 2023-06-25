@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
+import { Image } from 'react-native';
+
 
 const QuizGame = () => {
   const [questions, setQuestions] = useState([
@@ -201,6 +203,7 @@ const QuizGame = () => {
       {gameStarted ? (
         showScore ? (
           <View style={styles.scoreContainer}>
+          <Image source={require('./assets/logo.png')}style={styles.startimg} />
             {showLossMessage ? (
               <Text style={styles.scoreText}>Você perdeu por acertar menos de 8 perguntas.</Text>
             ) : (
@@ -237,7 +240,7 @@ const QuizGame = () => {
         )
       ) : (
         <View style={styles.startContainer}>
-          <Text style={styles.startText}>League of Legends Quiz</Text>
+          <Image source={require('./assets/logo.png')}style={styles.startimg} />
           <TouchableOpacity style={styles.startButton} onPress={startGame}>
             <Text style={styles.startButtonText}>Iniciar Jogo</Text>
           </TouchableOpacity>
@@ -248,60 +251,94 @@ const QuizGame = () => {
 };
 
 const styles = StyleSheet.create({
+
+/*PRIMEIRA TELA*/
   container: {
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#010A13',
   },
   startContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
-  startText: {
-    fontSize: 24,
-    marginBottom: 20,
-    textAlign: 'center',
+  startimg:{
+    width: 300,
+    height: 200
   },
   startButton: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#1e2328',
+    color: '#cdbe91',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    borderWidth: 2,
+    borderColor: '#c8aa6d',
+    borderImageSlice: 1,
   },
   startButtonText: {
-    color: 'white',
+    color: '#cdbe91',
+    textShadowColor: '#ffffff80',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 5,
     fontSize: 18,
   },
+  /*FIM PRIMEIRA TELA*/
   questionContainer: {
     marginBottom: 20,
   },
   questionText: {
     fontSize: 20,
     textAlign: 'center',
+    color: '#e4d685'
   },
   optionButton: {
-    backgroundColor: 'lightgray',
-    padding: 10,
+    backgroundColor: '#e4d685',
+    paddingVertical: 10,
+    paddingHorizontal: 20,
     marginVertical: 5,
     borderRadius: 5,
+    justifyContent: 'space-evenly'
   },
   optionText: {
-    fontSize: 16,
+    color: 'black',
+    fontSize: 15,
     textAlign: 'center',
   },
   hintButton: {
-    backgroundColor: 'yellow',
-    padding: 10,
-    marginVertical: 5,
-    borderRadius: 5,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#1e2328',
+    color: '#cdbe91',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    borderWidth: 2,
+    borderColor: '#c8aa6d',
+    borderImageSlice: 1,
   },
   hintButtonText: {
-    fontSize: 16,
-    textAlign: 'center',
+    color: '#cdbe91',
+    textShadowColor: '#ffffff80',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 5,
+    fontSize: 18,
+    textAlign: 'center'
   },
   hintText: {
     marginTop: 10,
     fontSize: 14,
     textAlign: 'center',
+    color: '#cdbe91'
   },
   scoreContainer: {
     justifyContent: 'center',
@@ -311,15 +348,30 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 20,
     textAlign: 'center',
+    color: '#cdbe91'
   },
   button: {
-    backgroundColor: 'blue',
-    padding: 10,
-    borderRadius: 5,
+    fontWeight: 'bold',
+    letterSpacing: 1,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: '#1e2328',
+    color: '#cdbe91',
+    shadowColor: '#000000',
+    shadowOffset: { width: 0, height: 0 },
+    shadowOpacity: 0.2,
+    shadowRadius: 2,
+    borderWidth: 2,
+    borderColor: '#c8aa6d',
+    borderImageSlice: 1,
   },
   buttonText: {
-    color: 'white',
+    color: '#cdbe91',
+    textShadowColor: '#ffffff80',
+    textShadowOffset: { width: 0, height: 0 },
+    textShadowRadius: 5,
     fontSize: 18,
+    textAlign: 'center'
   },
 });
 
