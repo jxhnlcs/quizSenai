@@ -450,7 +450,7 @@ const styles = StyleSheet.create({
   timerContainer: {
     position: 'absolute',
     top: -100,
-    right: -40,
+    right: -10,
   },
 
   timerText: {
