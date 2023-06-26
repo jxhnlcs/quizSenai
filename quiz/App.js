@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Image } from 'react-native';
 
@@ -146,6 +146,7 @@ const QuizGame = () => {
   const [showLossMessage, setShowLossMessage] = useState(false);
   const [showWinMessage, setShowWinMessage] = useState(false);
   const [gameStarted, setGameStarted] = useState(false);
+  const [timer, setTimer] = useState(10); 
 
   const handleAnswer = (selectedOption) => {
     if (!questions[currentQuestion].answered) {
@@ -167,6 +168,7 @@ const QuizGame = () => {
         }
       } else {
         setCurrentQuestion(currentQuestion + 1);
+        setTimer(10); // Reiniciar o temporizador para a próxima pergunta
       }
     }
   };
@@ -191,6 +193,7 @@ const QuizGame = () => {
     setShowScore(false);
     setShowLossMessage(false);
     setShowWinMessage(false);
+    setTimer(10); // Reiniciar o temporizador
   };
 
   const startGame = () => {
@@ -201,6 +204,24 @@ const QuizGame = () => {
   const returnToHome = () => {
     setGameStarted(false);
   };
+
+  useEffect(() => {
+    if (gameStarted) {
+      const countdown = setInterval(() => {
+        setTimer((prevTimer) => prevTimer - 1);
+      }, 1000);
+
+      return () => {
+        clearInterval(countdown);
+      };
+    }
+  }, [gameStarted]);
+
+  useEffect(() => {
+    if (timer === 0) {
+      handleAnswer(''); // Pular para próxima pergunta
+    }
+  }, [timer]);
 
   return (
     <View style={styles.container}>
@@ -229,6 +250,9 @@ const QuizGame = () => {
           </View>
         ) : (
           <View>
+            <View style={styles.timerContainer}>
+              <Text style={styles.timerText}>Tempo restante: {timer} segundos</Text>
+            </View>
             <View style={styles.questionContainer}>
               <Text style={styles.questionText}>{questions[currentQuestion].question}</Text>
             </View>
@@ -273,14 +297,17 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: '#010A13',
   },
+
   startContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   startimg:{
     width: 300,
     height: 200
   },
+
   startButton: {
     fontWeight: 'bold',
     letterSpacing: 1,
@@ -296,6 +323,7 @@ const styles = StyleSheet.create({
     borderColor: '#c8aa6d',
     borderImageSlice: 1,
   },
+
   startButtonText: {
     color: '#cdbe91',
     textShadowColor: '#ffffff80',
@@ -303,30 +331,35 @@ const styles = StyleSheet.create({
     textShadowRadius: 5,
     fontSize: 18,
   },
-  /*FIM PRIMEIRA TELA*/
+
   resultadocontainer:{
     justifyContent: 'center',
     display: 'flex',
     alignItems: 'center',
   },
+
   victoryimg:{
     width: 400,
     height: 300,
   },
+
   derrotaimg:{
     width: 300,
     alignItems: 'center',
     height: 350,
   },
+
   questionContainer: {
     marginBottom: 20,
   },
+
   questionText: {
     fontSize: 20,
     textAlign: 'center',
     color: '#e4d685',
     width: 300
   },
+
   optionButton: {
     backgroundColor: '#e4d685',
     paddingVertical: 10,
@@ -335,11 +368,13 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     justifyContent: 'space-evenly'
   },
+
   optionText: {
     color: 'black',
     fontSize: 15,
     textAlign: 'center',
   },
+
   hintButton: {
     fontWeight: 'bold',
     letterSpacing: 1,
@@ -354,7 +389,9 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#c8aa6d',
     borderImageSlice: 1,
+    marginTop: 5
   },
+
   hintButtonText: {
     color: '#cdbe91',
     textShadowColor: '#ffffff80',
@@ -363,22 +400,26 @@ const styles = StyleSheet.create({
     fontSize: 18,
     textAlign: 'center'
   },
+
   hintText: {
     marginTop: 10,
     fontSize: 14,
     textAlign: 'center',
     color: '#cdbe91',
   },
+
   scoreContainer: {
     justifyContent: 'center',
     alignItems: 'center',
   },
+
   scoreText: {
     fontSize: 20,
     marginBottom: 20,
     textAlign: 'center',
     color: '#cdbe91'
   },
+
   button: {
     fontWeight: 'bold',
     letterSpacing: 1,
@@ -396,6 +437,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     width: 250
   },
+
   buttonText: {
     color: '#cdbe91',
     textShadowColor: '#ffffff80',
@@ -403,6 +445,18 @@ const styles = StyleSheet.create({
     textShadowRadius: 5,
     fontSize: 18,
     textAlign: 'center'
+  },
+
+  timerContainer: {
+    position: 'absolute',
+    top: -100,
+    right: -40,
+  },
+
+  timerText: {
+    fontSize: 16,
+    fontWeight: 'bold',
+    color: '#cdbe91'
   },
 });
 
