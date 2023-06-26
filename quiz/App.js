@@ -203,11 +203,17 @@ const QuizGame = () => {
       {gameStarted ? (
         showScore ? (
           <View style={styles.scoreContainer}>
-          <Image source={require('./assets/logo.png')}style={styles.startimg} />
+
             {showLossMessage ? (
-              <Text style={styles.scoreText}>Você perdeu por acertar menos de 8 perguntas.</Text>
+              <View style={styles.resultadocontainer}>
+                <Image source={require('./assets/derrota.png')}style={styles.derrotaimg} />
+                <Text style={styles.scoreText}>Você perdeu por acertar menos de 8 perguntas.</Text>
+              </View>
             ) : (
-              <Text style={styles.scoreText}>Você venceu acertando {score} de {questions.length} perguntas!</Text>
+              <View style={styles.resultadocontainer}>
+                <Image source={require('./assets/victory.png')}style={styles.victoryimg} />
+                <Text style={styles.scoreText}>Você venceu acertando {score} de {questions.length} perguntas!</Text>
+              </View>
             )}
             <TouchableOpacity style={styles.button} onPress={resetQuiz}>
               <Text style={styles.buttonText}>Jogar Novamente</Text>
@@ -290,6 +296,20 @@ const styles = StyleSheet.create({
     fontSize: 18,
   },
   /*FIM PRIMEIRA TELA*/
+  resultadocontainer:{
+    justifyContent: 'center',
+    display: 'flex',
+    alignItems: 'center',
+  },
+  victoryimg:{
+    width: 400,
+    height: 300,
+  },
+  derrotaimg:{
+    width: 300,
+    alignItems: 'center',
+    height: 350,
+  },
   questionContainer: {
     marginBottom: 20,
   },
