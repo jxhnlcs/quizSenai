@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { Image } from 'react-native';
 
-
 const QuizGame = () => {
   const [questions, setQuestions] = useState([
     {
@@ -11,7 +10,7 @@ const QuizGame = () => {
       correctAnswer: 'Lux',
       answered: false,
       userAnswer: null,
-      hint: 'Os irmãos faziam parte de uma família influente que serviu como protetores dos reis de Demacia por gerações.',
+      hint: 'Os irmãos são de Demacia',
     },
 
     {
@@ -65,7 +64,7 @@ const QuizGame = () => {
       correctAnswer: 'Atirador',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: Essa classe costuma ter campeões que usam armas de longa distância.',
+      hint: 'Dica: Longa distância.',
     },
 
     {
@@ -110,7 +109,7 @@ const QuizGame = () => {
       correctAnswer: 'SKT T1',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: É o time de um cara que já foi considerado o melhor do mundo.',
+      hint: 'Dica: O melhor do mundo.',
     },
 
     {
@@ -119,7 +118,7 @@ const QuizGame = () => {
       correctAnswer: 'Jax',
       answered: false,
       userAnswer: null,
-      hint: 'Dica: "Imagina se eu tivesse uma arma de verdade" disse ele.',
+      hint: 'Dica: "Imagina se eu tivesse uma arma de verdade"',
     },
 
     {
@@ -195,7 +194,12 @@ const QuizGame = () => {
   };
 
   const startGame = () => {
+    resetQuiz();
     setGameStarted(true);
+  };
+
+  const returnToHome = () => {
+    setGameStarted(false);
   };
 
   return (
@@ -217,6 +221,10 @@ const QuizGame = () => {
             )}
             <TouchableOpacity style={styles.button} onPress={resetQuiz}>
               <Text style={styles.buttonText}>Jogar Novamente</Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.button} onPress={returnToHome}>
+              <Text style={styles.buttonText}>Voltar para a Tela Inicial</Text>
             </TouchableOpacity>
           </View>
         ) : (
@@ -316,7 +324,8 @@ const styles = StyleSheet.create({
   questionText: {
     fontSize: 20,
     textAlign: 'center',
-    color: '#e4d685'
+    color: '#e4d685',
+    width: 300
   },
   optionButton: {
     backgroundColor: '#e4d685',
@@ -358,7 +367,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     fontSize: 14,
     textAlign: 'center',
-    color: '#cdbe91'
+    color: '#cdbe91',
   },
   scoreContainer: {
     justifyContent: 'center',
@@ -384,6 +393,8 @@ const styles = StyleSheet.create({
     borderWidth: 2,
     borderColor: '#c8aa6d',
     borderImageSlice: 1,
+    marginTop: 20,
+    width: 250
   },
   buttonText: {
     color: '#cdbe91',
